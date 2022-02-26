@@ -1,3 +1,5 @@
+'use strict'
+
 const Instagram = require('instagram-web-api')
 const express = require('express')
 
@@ -11,7 +13,7 @@ let profile = {}
 let userId
 
 async function login(username, password, first_ = 10) {
-    /// @TODO: Make sure profile also contains a list : str of classes
+    /// @TODO: Make sure profile also contains an array : str of classes
     /// Should we make classes because we have global variables?
     client = new Instagram({ username, password })
     try {
@@ -23,7 +25,7 @@ async function login(username, password, first_ = 10) {
 }
 
 
-async function getConnections(username, password, first_ = 10) {
+async function getConnections(currentUserId) {
     // get first 100 followers and followings, can disable the first thing
     /// Elements in arrays of type {typeof(followers)} contain the following fields: 
     /// id, username, full_name (bio name)
@@ -31,7 +33,7 @@ async function getConnections(username, password, first_ = 10) {
     var following = []
     
     try {
-        followers = await client.getFollowers({  userId: userId_, first: first_ })
+        followers = await client.getFollowers({  currentUserId: userId_ })
         /// @TODO: REMOVE LATER
         /// I want to set return types everywhere for ease of reference because I can't test
         console.log(typeof(followers))                                              
@@ -40,7 +42,7 @@ async function getConnections(username, password, first_ = 10) {
     }
 
     try {
-        following = await client.getFollowings({ userId: userId_, first: first_ })
+        following = await client.getFollowings({ currentUserId: userId_ })
     } catch (e) {
         console.log(e)
     }
@@ -49,13 +51,34 @@ async function getConnections(username, password, first_ = 10) {
     // each object in data has the following fields: id, username, full_name (bio name), 
     var connections = followers.data + following.data
     
-    /// @TODO: Before returning connections, add a field `classes`, which is a list : str of 
+    /// @TODO: Before returning connections, add a field `classes`, which is an array : str of 
     /// all the classes each user (element in connections) is taking
 
     // should we do this here?
     client.logout()
     
     return connections
+}
+
+async function findAllCommons(currentUserId) {
+    const connections = getConnections(currentUserId)
+    let data = {}
+    /// Assuming 'connection' is a user object, which it is currently not
+    for (const connection of connections) {
+        let listOfCommonClasses = getCommonClasses(connection)
+        data.put(connection, listOfCommonClasses)
+    }
+    return data
+}
+
+/// Need to find a way to construct users. Not sure exactly what the structure is right now.
+async function getCommonClasses(otherUser) {
+    let otherUserClasses = otherUser.profile.classes
+    let currentUserClasses = profile.classes
+    /// The following finds classes in common between the two arrays
+    /// Uses Array.prototype.filter() and Array.prototype.includes()
+    const commonClasses = otherUserClasses.filter(class_ => currentUserClasses.includes(class_))
+    return commonClasses
 }
 
 // following bypasses CORS, sourced from:
