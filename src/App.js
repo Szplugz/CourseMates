@@ -20,10 +20,12 @@ function App() {
   });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {items}
+      
+      <header className="App-header" id="fade-in">
+        <p className="web-logo" >berry </p>
+        <p className='home-header'>
+        <strong>finding classes and mutuals <br/> has never been easier. </strong>
+        <br/>
         </p>
         <p className='small-home-header'>
           <strong>Choose your campus</strong>
@@ -40,5 +42,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
