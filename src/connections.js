@@ -6,26 +6,39 @@ const PORT = process.env.PORT || 3001;  // Our port defaults to port 3001 (if no
 
 const app = express();
 
-async function getConnections(username, password, first_ = 10) {
-    const client = new Instagram({ username, password })
-    var profile = {}
+let client
+let profile = {}
+let userId
+
+async function login(username, password, first_ = 10) {
+    /// @TODO: Make sure profile also contains a list : str of classes
+    /// Should we make classes because we have global variables?
+    client = new Instagram({ username, password })
     try {
         profile = await client.login()
     } catch (error) {
         console.log(error)
     }
-    const userId_ = profile.userId
-    
+    userId = profile.userId
+}
+
+
+async function getConnections(username, password, first_ = 10) {
     // get first 100 followers and followings, can disable the first thing
-    var followers = []
+    /// Elements in arrays of type {typeof(followers)} contain the following fields: 
+    /// id, username, full_name (bio name)
+    var followers = [] /// @TODO: Add type {typeof(followers)}
     var following = []
     
     try {
         followers = await client.getFollowers({  userId: userId_, first: first_ })
+        /// @TODO: REMOVE LATER
+        /// I want to set return types everywhere for ease of reference because I can't test
+        console.log(typeof(followers))                                              
     } catch(e) {
         console.log(e)
     }
-    /*
+
     try {
         following = await client.getFollowings({ userId: userId_, first: first_ })
     } catch (e) {
@@ -36,11 +49,13 @@ async function getConnections(username, password, first_ = 10) {
     // each object in data has the following fields: id, username, full_name (bio name), 
     var connections = followers.data + following.data
     
+    /// @TODO: Before returning connections, add a field `classes`, which is a list : str of 
+    /// all the classes each user (element in connections) is taking
+
     // should we do this here?
-    */
     client.logout()
     
-    return { "uid": userId_, "fols": followers, "fing": following }
+    return connections
 }
 
 // following bypasses CORS, sourced from:
@@ -54,10 +69,13 @@ app.use(function (req, res, next) {
 
 app.use(express.json()); 
 
+/// @TODO: What
 app.get("/test", (req, res) => { res.send("hello") });
 
+
+/// @TODO: Set up getConnections params to be read directly from POST request
 app.get("/get_connections", async (req, res) => {
-    var concs = await getConnections("spectraldoy", "")
+    var concs = await getConnections("", "")
     res.send(concs)
 });
 
