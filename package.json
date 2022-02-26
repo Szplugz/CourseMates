@@ -39,7 +39,7 @@
     "react-scripts": "5.0.0",
     "request": "^2.88.2",
     "request-promise-native": "^1.0.9",
-    "stream": "^3.0.0",
+    "stream": "npm:stream-browserify",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "tls": "^0.0.1",
