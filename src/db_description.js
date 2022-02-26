@@ -16,12 +16,12 @@ var stud_db = {
         ig_handle: "",
         uni_id: "",
         classes: Set(), // set of classnames
-        connections: Set() // set of ig handles following U followers
+        // unnecessary: connections: Set() // set of ig handles following U followers
     },
     studId2: {
         ig_handle: "",
         uni_id: "",
         classes: Set(), // set of classnames
-        connections: Set() // set of ig handles following U followers
+        // unnecessary: connections: Set() // set of ig handles following U followers
     }
 }
