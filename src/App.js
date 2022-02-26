@@ -1,6 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import getConnections from './instagram';
+import Card from './Components/Card';
 
 function App() {
   var concs = ['a']
@@ -25,15 +25,18 @@ function App() {
         <p>
           {items}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p className='small-home-header'>
+          <strong>Choose your campus</strong>
+        </p>
+      <Card
+      />
+        <p className='footer-text'>
+         Created for HackIllinois 2022
+        <br/> With love, from Aditya Gomatam, Estrella Popoca, and Neel Khare
+         </p>
+        
       </header>
+
     </div>
   );
 }

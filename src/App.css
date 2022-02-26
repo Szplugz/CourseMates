@@ -1,10 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 .App {
-  text-align: center;
+  /* text-align: center; */
+  background-image: linear-gradient(#78A2AB, #1B6C99);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#fade-in {
+  /* margin-top: 25px;
+  font-size: 21px;
+  text-align: center; */
+
+  -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 4s; /* Firefox < 16 */
+      -ms-animation: fadein 4s; /* Internet Explorer */
+       -o-animation: fadein 4s; /* Opera < 12.1 */
+          animation: fadein 4s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,19 +45,53 @@
   }
 }
 
+.web-logo {
+  font-family: 'Poppins';
+  font-size: 100px;
+  padding-left: 40px;
+  padding-bottom: 0px;
+  margin: 0px 40px 10px 15px;
+}
 .App-header {
-  background-color: #282c34;
+  /* background-image: linear-gradient(#78A2AB, #1B6C99); */
+  /* text-align: center; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* font-size: calc(10px + 2vmin); */
   color: white;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.home-header {
+  font-family: 'Poppins', sans-serif;
+  color: #C9D4DA;
+  font-size: x-large;
+  text-align: center;
+}
+
+.small-home-header {
+  font-family: 'Poppins', sans-serif;
+  font-size: large;
+  text-align: center;
+}
+
+.footer-text {
+  display: flex;
+  font-family: 'Poppins', 'sans-serif';
+  font-size: medium;
+  justify-content: center;
+  color: white;
+  opacity: 0.3;
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  margin-top: 40px;
 }
 
 @keyframes App-logo-spin {
