@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import Card from './Components/Card';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+      
+      <header className="App-header" id="fade-in">
+        <p className="web-logo" >berry </p>
+        <p className='home-header'>
+        <strong>finding classes and mutuals <br/> has never been easier. </strong>
+        <br/>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p className='small-home-header'>
+          <strong>Choose your campus</strong>
+        </p>
+      <Card
+      />
+        <p className='footer-text'>
+         Created for HackIllinois 2022
+        <br/> With love, from Aditya Gomatam, Estrella Popoca, and Neel Khare
+         </p>
+        
       </header>
+
     </div>
   );
 }
