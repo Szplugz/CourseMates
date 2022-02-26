@@ -6,7 +6,7 @@ function App() {
   var concs = ['a']
   /*
   try {
-    concs = getConnections("spectraldoy", "Iliketrains9")
+    concs = getConnections("spectraldoy", "")
   } catch (error) {
     console.log(error)
     concs = ['a']
