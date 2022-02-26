@@ -12,5 +12,3 @@ async function gf(username, password) {
 }
 
 export default gf;
-
- 
