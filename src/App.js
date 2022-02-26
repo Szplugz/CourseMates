@@ -1,12 +1,11 @@
 import './App.css';
-import getConnections from './instagram';
 import Card from './Components/Card';
 
 function App() {
-  var concs = ['a']
+  var concs = []
   /*
   try {
-    concs = getConnections("spectraldoy", "Iliketrains9")
+    concs = getConnections("spectraldoy", "")
   } catch (error) {
     console.log(error)
     concs = ['a']
