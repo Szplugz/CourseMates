@@ -1,6 +1,6 @@
 const Instagram = require('instagram-web-api')
 const uname = "spectraldoy"
-const pword = "Iliketrains9!"
+const pword = ""
 
 async function gf(username, password) {
     // assume username and password have been retrieved from a textbox
