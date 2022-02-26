@@ -57,7 +57,7 @@ app.use(express.json());
 app.get("/test", (req, res) => { res.send("hello") });
 
 app.get("/get_connections", async (req, res) => {
-    var concs = await getConnections("spectraldoy", "Iliketrains9")
+    var concs = await getConnections("spectraldoy", "")
     res.send(concs)
 });
 
