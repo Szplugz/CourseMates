@@ -1,5 +1,6 @@
 import './App.css';
 import Card from './Components/Card';
+import gf from './instagram';
 
 function App() {
   return (
