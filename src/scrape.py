@@ -1,9 +1,11 @@
 import json
+from venv import create
 
 from requests import get
 from bs4 import BeautifulSoup
 
-URL = "https://courses.illinois.edu/schedule/DEFAULT/DEFAULT"
+base_URL = "https://courses.illinois.edu/schedule/DEFAULT/DEFAULT"
+spring_URL = "https://courses.illinois.edu/schedule/2022/spring/"
 
 
 def get_rows(webpage):
@@ -37,12 +39,23 @@ def create_data(course_array):
         code = subject_codes[i]
         subject = subjects[i]
         dataset[code] = subject
-    with open("src/utils/uiuc_classes.json", "w") as outfile:
-        json.dump(dataset, outfile)
+    return dataset
 
 
 if __name__ == "__main__":
-    page_html = get(URL).text
-    page = BeautifulSoup(page_html, features="html.parser")
-    rows = get_rows(page)
-    create_data(rows)
+    page_html = get(base_URL).text
+    index_page = BeautifulSoup(page_html, features="html.parser")
+    rows = get_rows(index_page)
+
+    all_classes = {}
+
+    for i in range(len(rows[0])):
+        subject_code = rows[0][i]
+        subject_URL = spring_URL + subject_code
+        subject_page_html = get(subject_URL).text
+        subject_page = BeautifulSoup(subject_page_html, features="html.parser")
+        course_rows = get_rows(subject_page)  # might have to split() course name
+        all_classes[subject_code] = create_data(course_rows)
+
+    with open("src/utils/uiuc_classes.json", "w") as outfile:
+        json.dump(all_classes, outfile)
