@@ -75,19 +75,27 @@ function App() {
 
   function getUsernames(list) {
     const unames = list.map( (x) =>
+      x.username
+    );
+    return unames
+  }
+
+  function getUsernamesAsListElements(list) {
+    const unames = list.map( (x) =>
       <li>{x.username}</li>
     );
     return unames
   }
   return (
     <div className="App">
-      <p>Followers</p>
+      <p>Connections</p>
       <ul>
-        {getUsernames(userData.followers)}
+        {getUsernamesAsListElements(userData.followers)}
+        {getUsernamesAsListElements(userData.following)}
       </ul>
       <p>Following</p>
       <ul>
-        {getUsernames(userData.following)}
+        {}
       </ul>
       <header className="App-header" id="fade-in">
         <p className="web-logo" >berry </p>
