@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState, useCallback } from 'react';
 import Card from './Components/Card';
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"; // also import Link
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"; // also import Link
 import Landing_Two from './Landing_Two';
 
 function App() {
@@ -93,6 +93,7 @@ function App() {
   function Homepage() {
     return (
       <div className="App">
+        { /*
         <p>Connections</p>
         <ul>
           {getUsernamesAsListElements(userData.followers)}
@@ -102,8 +103,9 @@ function App() {
         <ul>
           {}
         </ul>
+        */}
         <header className="App-header" id="fade-in">
-          <p className="web-logo" >berry </p>
+          <p className="web-logo" onClick={event =>  window.location.href='/home'}>berry </p>
           <p className='home-header'>
           <strong>finding classes and mutuals <br/> has never been easier. </strong>
           <br/>
@@ -127,6 +129,9 @@ function App() {
     <div>
       <BrowserRouter>
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/home"></Redirect>
+          </Route>
           <Route path="/home" component={Homepage}></Route>
           <Route path="/Landing_Two" component={Landing_Two}></Route>
         </Switch>
