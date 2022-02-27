@@ -12,8 +12,8 @@
     flex-direction: row;
     align-items: center;
     order: 1;
-    width: 27vh;
-    height: 15vh;
+    width: 285px;
+    height: 105px;
     overflow: hidden;
     border-radius: 10px;
     background-color: #9CBDC5;
@@ -24,16 +24,18 @@
 
 .card-container-1:hover {
     background-color: #789FA8;
+    cursor: pointer;
 }
 
+/* https://khaledkzy.github.io/pixel-vh-vw-converter/ */
 .card-container-2 {
     display: flex;
     justify-content: center;
     flex-direction: row;
     align-items: center;
     order: 2;
-    width: 27vh;
-    height: 15vh;
+    width: 285px;
+    height: 105px;
     border-radius: 10px;
     overflow: hidden;
     background-color: #9CBDC5;
@@ -44,6 +46,7 @@
 }
 
 .card-container-2:hover {
+    cursor: pointer;
     background-color: #789FA8;
 }
 

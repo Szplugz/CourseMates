@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans');
+
 .Landing_Two {
     background-image: linear-gradient(#7751A7, #995062);
 }
@@ -49,11 +51,58 @@
     padding-left: 40px;
     padding-bottom: 0px;
     margin: 0px 40px 10px 15px;
+    cursor: pointer;
   }
 
-  .Landing_Two.header {
+  .Landing_Two-header {
+    /* background-image: linear-gradient(#78A2AB, #1B6C99); */
+    /* text-align: center; */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* font-size: calc(10px + 2vmin); */
     color: white;
   }
+
+  .twt-button {
+    justify-content: center;
+    align-items: center;
+    width: 189px;
+    height: 49;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-top: 12px;
+    border: 0px;
+    background-color: #1DA1F2;
+    transition: background-color 1s ease-out 5ms;
+    color: white;
+    font-family: 'TwitterChirp';
+    cursor: pointer;
+}
+
+.twt-logo {
+  width: 37px;
+  height: 37px;
+  margin-left: 4px;
+}
+
+.button-text {
+  font-family: 'IBM Plex Sans';
+  margin-right: 7px;
+}
+
+.twt-align {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.small-home-header {
+  font-family: 'Poppins', sans-serif;
+  font-size: large;
+  text-align: center;
+  flex-direction: column;
+}
