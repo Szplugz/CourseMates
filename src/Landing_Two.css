@@ -1,0 +1,59 @@
+.Landing_Two {
+    background-image: linear-gradient(#7751A7, #995062);
+}
+
+#fade-in {
+    /* margin-top: 25px;
+    font-size: 21px;
+    text-align: center; */
+  
+    -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 4s; /* Firefox < 16 */
+        -ms-animation: fadein 4s; /* Internet Explorer */
+         -o-animation: fadein 4s; /* Opera < 12.1 */
+            animation: fadein 4s;
+  }
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  /* Firefox < 16 */
+  @-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  /* Safari, Chrome and Opera > 12.1 */
+  @-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  /* Internet Explorer */
+  @-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .web-logo {
+    font-family: 'Poppins';
+    font-size: 100px;
+    padding-left: 40px;
+    padding-bottom: 0px;
+    margin: 0px 40px 10px 15px;
+  }
+
+  .Landing_Two.header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
