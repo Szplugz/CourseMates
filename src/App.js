@@ -1,10 +1,11 @@
 import './App.css';
+import './Landing_Two.css';
 import React, { useState, useCallback } from 'react';
 import Card from './Components/Card';
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"; // also import Link
 import Landing_Two from './Landing_Two';
+/*
 import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database"; 
@@ -28,29 +29,17 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const authentication = getAuth(app)
-
+*/
 function App() {
-  const twitterLogin = () => {
-    const provider = new TwitterAuthProvider();
-    signInWithPopup(authentication, provider)
-      .then((res) => {
-        let token = res.credential.accessToken;
-        let user = res.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
-  var username = "Szplugz"
+  const [username, setUsername] = useState("")
+  const [classes, setClasses] = useState(0)
   // to prevent too many API requests 
   // "lock" the retrieved data
   let lock = false
   // since using the React hooks causes many rerenders
   // set to (-1) to make API calls
-  const [userData, setUserData] = useState(
-  {
+  const [userData, setUserData] = useState(-1)
+    /*{
     userdata: {
       data: [{id: '1285878664500883456', name: 'Neel', username: 'Szplugz'}]
     },
@@ -67,28 +56,29 @@ function App() {
       {name: 'rambunctious scallywag', username: 'amemefriend', id: '1373303349597007876', created_at: '2021-03-20T16:00:25.000Z'},
       {name: 'official funny man', username: 'gerbswastaken', id: '1179650436590006272', created_at: '2019-10-03T06:53:15.000Z'}
     ]
-  })
+  })*/
 
   const loadUserData = useCallback(async () => {
-    if (lock) {
+    console.log(username)
+    if (lock || username === "") {
       return
     }
     await fetch(`http://localhost:3001/id_from_username?username=${username}`)
     .then( res => res.json() )
     .then( async (res_id) => { 
-      if (lock) {
+      if (lock || username === "") {
         return
       }
       await fetch(`http://localhost:3001/get_followers?userid=${res_id.data[0].id}`)
       .then( res => res.json() )
       .then( async(res_fer) => {
-        if (lock) {
+        if (lock || username === "") {
           return
         }
         await fetch(`http://localhost:3001/get_following?userid=${res_id.data[0].id}`)
         .then( res => res.json() )
         .then( res_fing => {
-          if (lock) {
+          if (lock || username === "") {
             return
           }
           var data = {
@@ -102,16 +92,15 @@ function App() {
       })
     })
     lock = true
-  }, []);
+  }, [username]);
   
-  if (!lock && userData === -1) {
+  if (username !==  "" && !lock && userData === -1) {
     // now it executes only ~4 * num_followers requests, instead of infinitely many
     loadUserData()
   }
   console.log("Data", userData)
-  if (userData !== -1) {
-    // save it somehow
-  }
+  console.log("uname", username)
+  console.log("classes", classes)
 
   function getUsernames(list) {
     const unames = list.map( (x) =>
@@ -122,7 +111,7 @@ function App() {
 
   function getUsernamesAsListElements(list) {
     const unames = list.map( (x) =>
-      <li>{x.username}</li>
+      <li className="flist">{x.username}</li>
     );
     return unames
   }
@@ -165,12 +154,20 @@ function App() {
   let app = (
     <div>
       <BrowserRouter>
+        <Route exact path={`/users/${username}`} >{username}</Route>
         <Switch>
           <Route exact path="/">
             <Redirect to="/home"></Redirect>
           </Route>
           <Route path="/home" component={Homepage}></Route>
-          <Route path="/Landing_Two"><Landing_Two login={twitterLogin}/></Route>
+          <Route path="/Landing_Two"><Landing_Two
+            username={username} 
+            setUsername={setUsername}
+            setClasses={setClasses}
+            classes={classes}
+            userData={userData}
+            getUsernames={getUsernamesAsListElements}
+          /></Route>
         </Switch>
       </BrowserRouter>
     </div>

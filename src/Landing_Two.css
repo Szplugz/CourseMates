@@ -4,6 +4,10 @@
     background-image: linear-gradient(#7751A7, #995062);
 }
 
+.Landing_Three {
+  background-image: linear-gradient(#974599, #CC6953);
+}
+
 #fade-in {
     /* margin-top: 25px;
     font-size: 21px;
@@ -57,20 +61,35 @@
   .Landing_Two-header {
     /* background-image: linear-gradient(#78A2AB, #1B6C99); */
     /* text-align: center; */
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* font-size: calc(10px + 2vmin); */
+    color: white;
+  }
+  .Landing_Two-header-2 {
+    /* background-image: linear-gradient(#78A2AB, #1B6C99); */
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    min-height: 33vh;
     /* align-items: center; */
     /* justify-content: center; */
     /* font-size: calc(10px + 2vmin); */
     color: white;
   }
 
+
   .twt-button {
+    display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 189px;
-    height: 49;
+    width: 261px;
+    height: 49px;
+    padding-left: 5px;
     overflow: hidden;
     border-radius: 10px;
     margin-top: 12px;
@@ -79,7 +98,28 @@
     transition: background-color 1s ease-out 5ms;
     color: white;
     font-family: 'TwitterChirp';
-    cursor: pointer;
+}
+
+.x-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 261px;
+  height: 49px;
+  padding-left: 2px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-top: 12px;
+  border: 0px;
+  background-color: #999999;
+  transition: background-color 1s ease-out 5ms;
+  color: white;
+  font-family: 'TwitterChirp';
+}
+
+.flist {
+  list-style: none;
 }
 
 .twt-logo {
@@ -95,14 +135,30 @@
 
 .twt-align {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 .small-home-header {
+  display: flex;
   font-family: 'Poppins', sans-serif;
   font-size: large;
   text-align: center;
   flex-direction: column;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit-button {
+  margin-right: 19px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10.5px;
+}
+
+.x-submit-button {
+  margin-right: 7px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 10.5px;
 }
