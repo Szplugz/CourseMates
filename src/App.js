@@ -1,48 +1,88 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Card from './Components/Card';
 
-async function loadUserId(username, setUserData) {
-  await fetch(`http://localhost:3001/id_from_username?username=${username}`)
-  .then( res => res.json() )
-  .then( res => setUserData(res))
-}
-
-async function loadUserFollowers(userId, setFollowers) {
-  await fetch(`http://localhost:3001/get_followers?userid=${userId}`)
-  .then( res => res.json() )
-  .then( res => setFollowers(res) )
-}
-
-async function loadUserFollows(userId, setFollowing) {
-  await fetch(`http://localhost:3001/get_following?userid=${userId}`)
-  .then( res => res.json() )
-  .then( res => setFollowing(res) )
-}
 
 function App() {
   var username = "Szplugz"
-  // to prevent too many API requests
-  const [lock, setLock] = useState(false)
-  const [userData, setUserData] = useState(0)
-  const [userFollowers, setFollowers] = useState(-1)
-  const [userFollowing, setFollowing] = useState(-1)
-  if (userData === 0 && !lock) {
+  // to prevent too many API requests 
+  // "lock" the retrieved data
+  let lock = false
+  // since using the React hooks causes many rerenders
+  const [userData, setUserData] = useState(-1)
+
+  const loadUserData = useCallback(async () => {
+    if (lock) {
+      return
+    }
+    await fetch(`http://localhost:3001/id_from_username?username=${username}`)
+    .then( res => res.json() )
+    .then( async (res_id) => { 
+      if (lock) {
+        return
+      }
+      await fetch(`http://localhost:3001/get_followers?userid=${res_id.data[0].id}`)
+      .then( res => res.json() )
+      .then( async(res_fer) => {
+        if (lock) {
+          return
+        }
+        await fetch(`http://localhost:3001/get_following?userid=${res_id.data[0].id}`)
+        .then( res => res.json() )
+        .then( res_fing => {
+          if (lock) {
+            return
+          }
+          var data = {
+            userdata: res_id,
+            connections: res_fer + res_fing
+          }
+          setUserData(data)
+          lock = true
+        });
+      })
+    })
     lock = true
-    loadUserId(username, setUserData)
+  }, []);
+  
+  /*
+  const loadUserFollowers = useCallback(async () => {
+    if (lock) {
+      return
+    }
+    lock = true
+    await fetch(`http://localhost:3001/get_followers?userid=${userData.data[0].id}`)
+    .then( res => res.json() )
+    .then( res => {
+      setFollowers(res)
+      lock = false
+    });
+  }, []);
+  
+  const loadUserFollows = useCallback(async () => {
+    if (lock) {
+      return
+    }
+    lock = true
+    await fetch(`http://localhost:3001/get_following?userid=${userData.data[0].id}`)
+    .then( res => res.json() )
+    .then( res => {
+      setFollowing(res)
+      lock = false
+    });
+  }, [setFollowing]);
+  */
+  if (!lock && userData === -1) {
+    // now it executes only ~4 * num_followers requests, instead of infinitely many
+    loadUserData()
   }
-  if (userData !== 0 && userFollowers === -1) {
-    loadUserFollowers(userData.data[0].id, setFollowers)
-  }
-  if (userData !== 0 && userFollowers === -1) {
-    loadUserFollows(userData.data[0].id, setFollowing)
-  }
-  console.log(userData)
-  console.log(userFollowers)
-  console.log(userFollowing)
+  console.log("Data", userData)
+
   return (
     <div className="App">
-      
+      <p>
+        {userData.connections[0], userData.connections[1]}  
+      </p>
       <header className="App-header" id="fade-in">
         <p className="web-logo" >berry </p>
         <p className='home-header'>

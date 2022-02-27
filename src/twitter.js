@@ -3,7 +3,6 @@ require("dotenv/config");
 
 // this is the ID for @TwitterDev
 const bearerToken = process.env.BEARER_TOKEN;
-console.log("breare", bearerToken)
 
 const express = require('express')
 

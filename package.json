@@ -14,6 +14,7 @@
     "browserify-fs": "^1.0.0",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
+    "concurrently": "^7.0.0",
     "crypto": "npm:crypto-browserify",
     "crypto-browserify": "^3.12.0",
     "eslint-config-prettier": "^8.4.0",
@@ -62,8 +63,10 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "server": "node src/twitter.js",
     "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject"
+    "eject": "react-app-rewired eject",
+    "dev": "concurrently --kill-others \"npm run start\" \"npm run server\""
   },
   "eslintConfig": {
     "extends": [
