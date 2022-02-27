@@ -7,8 +7,8 @@ const cheerio = require('cheerio')
 * Function to retrieve raw data
 * @param URL: url to course explorer
 */
-const getRawData = (URL) => {
-    return fetch(URL)
+const getRawData = async (URL) => {
+    return await fetch(URL)
         .then((response) => response.text())
         .catch((error) => {
             const errorCode = error.code
@@ -31,39 +31,21 @@ const getMainTable = async () => {
     /// Not entirely sure what the last .children is for
     /// I think parsedMajorsData("table")[0] is the whole table
     /// and .children[1] gets rid of the column headings
-    const majorCodeTable = parsedMajorsData("table")[0].children[1].children
+    const majorCodeTable = parsedMajorsData("td")
 
     console.log("Subject Code --- Subject")
+    //console.log(majorCodeTable)
 
-    majorCodeTable.forEach((row) => {
-        // extracting 'td' tags
-        if (row.name == 'tr') {
-            let subjectCode, subject
-            const cols = row.children.filter((col) => col.name === 'td')
-            // get subject codes
-            const subjectCodeCol = cols[0]
-            if (subjectCodeCol) {
-                subjectCode = subjectCodeCol.children[0]
-                if (subjectCode) {
-                    subjectCode = subjectCode.children[0].data
-                }
-            }
+    console.log(majorCodeTable.length)
+    for (let i = 0; i < 382; i++) {
+        let row = majorCodeTable[i]
+        let t = row.children[0].data
+        // here we have restriction that char
 
-            // get subject name
-            const subjectCol = cols[1]
-            if (subjectCol) {
-                subject = subjectCol.children[0]
-                if (subject) {
-                    subject = subject.children[0].data
-                }
-            }
-
-            if (subjectCol && subject) {
-                console.log(`${subjectCol} --- ${subject}`)
-            }
-        }
-    })
+        console.log(t.replace(/[^a-zA-Z0-9]/, ''))
+    }
+    
 }
 
 // query url -> https://courses.illinois.edu/schedule/2022/spring/{COURSE CODE}
-
+getMainTable();
