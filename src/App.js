@@ -1,14 +1,45 @@
 import './App.css';
+import React, { useState } from 'react';
 import Card from './Components/Card';
 
+async function loadUserId(username, setUserData) {
+  await fetch(`http://localhost:3001/id_from_username?username=${username}`)
+  .then( res => res.json() )
+  .then( res => setUserData(res))
+}
+
+async function loadUserFollowers(userId, setFollowers) {
+  await fetch(`http://localhost:3001/get_followers?userid=${userId}`)
+  .then( res => res.json() )
+  .then( res => setFollowers(res) )
+}
+
+async function loadUserFollows(userId, setFollowing) {
+  await fetch(`http://localhost:3001/get_following?userid=${userId}`)
+  .then( res => res.json() )
+  .then( res => setFollowing(res) )
+}
+
 function App() {
-  var concs = []
-  const items = concs.map( (c) => {
-    <li key={c.id}>
-      {c.username}
-    </li>
-    console.log(c.username)
-  });
+  var username = "Szplugz"
+  // to prevent too many API requests
+  const [lock, setLock] = useState(false)
+  const [userData, setUserData] = useState(0)
+  const [userFollowers, setFollowers] = useState(-1)
+  const [userFollowing, setFollowing] = useState(-1)
+  if (userData === 0 && !lock) {
+    lock = true
+    loadUserId(username, setUserData)
+  }
+  if (userData !== 0 && userFollowers === -1) {
+    loadUserFollowers(userData.data[0].id, setFollowers)
+  }
+  if (userData !== 0 && userFollowers === -1) {
+    loadUserFollows(userData.data[0].id, setFollowing)
+  }
+  console.log(userData)
+  console.log(userFollowers)
+  console.log(userFollowing)
   return (
     <div className="App">
       
