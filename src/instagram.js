@@ -25,7 +25,7 @@ async function getConnections(username, password, first_ = 10) {
     } catch(e) {
         console.log(e)
     }
-    /*
+    
     try {
         following = await client.getFollowings({ userId: userId_, first: first_ })
     } catch (e) {
@@ -37,10 +37,9 @@ async function getConnections(username, password, first_ = 10) {
     var connections = followers.data + following.data
     
     // should we do this here?
-    */
     client.logout()
     
-    return { "uid": userId_, "fols": followers, "fing": following }
+    return { "uid": userId_, "fols": followers.data, "fing": following.data }
 }
 
 // following bypasses CORS, sourced from:
@@ -57,7 +56,7 @@ app.use(express.json());
 app.get("/test", (req, res) => { res.send("hello") });
 
 app.get("/get_connections", async (req, res) => {
-    var concs = await getConnections("spectraldoy", "")
+    var concs = await getConnections("testuserhackillinois", "Helloworld123$")
     res.send(concs)
 });
 
