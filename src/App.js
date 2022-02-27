@@ -1,6 +1,8 @@
 import './App.css';
 import React, { useState, useCallback } from 'react';
 import Card from './Components/Card';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"; // also import Link
+import Landing_Two from './Landing_Two';
 
 function App() {
   var username = "8uzz0ff"
@@ -86,38 +88,53 @@ function App() {
     );
     return unames
   }
-  return (
-    <div className="App">
-      <p>Connections</p>
-      <ul>
-        {getUsernamesAsListElements(userData.followers)}
-        {getUsernamesAsListElements(userData.following)}
-      </ul>
-      <p>Following</p>
-      <ul>
-        {}
-      </ul>
-      <header className="App-header" id="fade-in">
-        <p className="web-logo" >berry </p>
-        <p className='home-header'>
-        <strong>finding classes and mutuals <br/> has never been easier. </strong>
-        <br/>
-        </p>
-        <p className='small-home-header'>
-          <strong>Choose your campus</strong>
-        </p>
-      <Card
-      />
-        <p className='footer-text'>
-         Created for HackIllinois 2022
-        <br/> With love, from Aditya Gomatam, Estrella Popoca, and Neel Khare
-         </p>
-        
-      </header>
 
+
+  function Homepage() {
+    return (
+      <div className="App">
+        <p>Connections</p>
+        <ul>
+          {getUsernamesAsListElements(userData.followers)}
+          {getUsernamesAsListElements(userData.following)}
+        </ul>
+        <p>Following</p>
+        <ul>
+          {}
+        </ul>
+        <header className="App-header" id="fade-in">
+          <p className="web-logo" >berry </p>
+          <p className='home-header'>
+          <strong>finding classes and mutuals <br/> has never been easier. </strong>
+          <br/>
+          </p>
+          <p className='small-home-header'>
+            <strong>Choose your campus</strong>
+          </p>
+        <Card
+        />
+          <p className='footer-text'>
+          Created for HackIllinois 2022
+          <br/> With love, from Aditya Gomatam, Estrella Popoca, and Neel Khare
+          </p>
+          
+        </header>
+
+      </div>
+    );
+  }
+  let app = (
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/home" component={Homepage}></Route>
+          <Route path="/Landing_Two" component={Landing_Two}></Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
-}
 
+  return app
+}
 
 export default App;

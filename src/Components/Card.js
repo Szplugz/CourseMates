@@ -11,13 +11,11 @@ function Card() {
                 <img src={uiuc} className="uiuc-logo" alt="uiuc" />
                     </div>
             </div>
-
             <div className="card-container-2" onClick={event =>  window.location.href='/Landing_Two'}>
                 <div className="image-container">
                 <img src={ucla} className="uiuc-logo" alt="uiuc" />
                     </div>
             </div>
-
         </div>
         
         
