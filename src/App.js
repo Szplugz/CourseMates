@@ -71,12 +71,24 @@ function App() {
   console.log("Data", userData)
   if (userData !== -1) {
     // save it somehow
-    console.log(userData.followers)
-    console.log(userData.following)
   }
 
+  function getUsernames(list) {
+    const unames = list.map( (x) =>
+      <li>{x.username}</li>
+    );
+    return unames
+  }
   return (
     <div className="App">
+      <p>Followers</p>
+      <ul>
+        {getUsernames(userData.followers)}
+      </ul>
+      <p>Following</p>
+      <ul>
+        {getUsernames(userData.following)}
+      </ul>
       <header className="App-header" id="fade-in">
         <p className="web-logo" >berry </p>
         <p className='home-header'>
