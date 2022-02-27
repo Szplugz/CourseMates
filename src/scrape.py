@@ -1,3 +1,5 @@
+import json
+
 from requests import get
 from bs4 import BeautifulSoup
 
@@ -35,12 +37,12 @@ def create_data(course_array):
         code = subject_codes[i]
         subject = subjects[i]
         dataset[code] = subject
-    return dataset
+    with open("src/utils/uiuc_classes.json", "w") as outfile:
+        json.dump(dataset, outfile)
 
 
 if __name__ == "__main__":
     page_html = get(URL).text
     page = BeautifulSoup(page_html, features="html.parser")
     rows = get_rows(page)
-    data = create_data(rows)
-    print(data) # store this into firebase instead of printing
+    create_data(rows)
