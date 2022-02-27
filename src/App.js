@@ -3,14 +3,6 @@ import Card from './Components/Card';
 
 function App() {
   var concs = []
-  /*
-  try {
-    concs = getConnections("spectraldoy", "")
-  } catch (error) {
-    console.log(error)
-    concs = ['a']
-  }
-  */
   const items = concs.map( (c) => {
     <li key={c.id}>
       {c.username}
