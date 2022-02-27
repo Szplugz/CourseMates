@@ -2,6 +2,8 @@ import './Landing_Two.css';
 import twtlogo from './utils/twt3.png'
 import { useState } from 'react';
 
+const CAP = 15
+
 function Landing_Two(props) {
   const [tempname, setTemp] = useState("")
   const [tempclasses, setTempC] = useState("")
@@ -74,11 +76,11 @@ function Landing_Two(props) {
                   </ul>
                   <strong>Here are your followers who take the same classes as you:</strong><br/>
                   <ul>
-                    {props.getUsernames(props.userData.followers)}
+                    {props.getUsernames(props.userData.followers).slice(0, CAP)}
                   </ul>
-                  <strong>Here are the people who follow you who take the same classes as you:<br/> </strong>
+                  <strong>Here are the people who you follow who take the same classes as you:<br/> </strong>
                   <ul>
-                    {props.getUsernames(props.userData.following)}
+                    {props.getUsernames(props.userData.following).slice(0, CAP)}
                   </ul>
               </p>
             </header>
