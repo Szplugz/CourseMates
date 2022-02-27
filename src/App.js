@@ -3,8 +3,23 @@ import React, { useState, useCallback } from 'react';
 import Card from './Components/Card';
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"; // also import Link
 import Landing_Two from './Landing_Two';
+import { authentication } from './firebase-config';
+import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 
 function App() {
+  const twitterLogin = () => {
+    const provider = new TwitterAuthProvider();
+    signInWithPopup(authentication, provider)
+      .then((res) => {
+        let token = res.credential.accessToken;
+        let user = res.user;
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   var username = "8uzz0ff"
   // to prevent too many API requests 
   // "lock" the retrieved data
