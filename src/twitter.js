@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3001;  // Our port defaults to port 3001 (if no
 
 const app = express();
 
+const MAX_RESULTS_PER_PAGE = 500
+
 // https://github.com/twitterdev/Twitter-API-v2-sample-code/blob/main/User-Lookup/get_users_with_bearer_token.js
 const endpointURL = "https://api.twitter.com/2/users/by?usernames="
 
@@ -42,7 +44,7 @@ async function getIdDataFromUsername(username) {
 async function getFollowers(userid) {
     let users = [];
     let params = {
-        "max_results": 10,
+        "max_results": MAX_RESULTS_PER_PAGE,
         "user.fields": "created_at",
     }
 
@@ -78,7 +80,7 @@ async function getFollowers(userid) {
 async function getFollowing(userid) {
     let users = [];
     let params = {
-        "max_results": 10,
+        "max_results": MAX_RESULTS_PER_PAGE,
         "user.fields": "created_at",
     }
 
