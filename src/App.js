@@ -39,24 +39,6 @@ function App() {
   // since using the React hooks causes many rerenders
   // set to (-1) to make API calls
   const [userData, setUserData] = useState(-1)
-    /*{
-    userdata: {
-      data: [{id: '1285878664500883456', name: 'Neel', username: 'Szplugz'}]
-    },
-    followers: [
-      {id: '2536623739', created_at: '2014-05-31T04:47:03.000Z', username: 'fidelgeorge1', name: 'Fidel George'},
-      {id: '1395030869308547077', created_at: '2021-05-19T14:57:53.000Z', username: 'TycoonCRM', name: 'TYCOON CRM'},
-      {id: '1445714705884979201', name: "nature'swrath96", created_at: '2021-10-06T11:37:13.000Z', username: 'devaslutty'},
-      {id: '870261369068593152', name: 'Mahos Rakta', created_at: '2017-06-01T12:50:53.000Z', username: 'rumplespaceking'},
-      {id: '1413196247343665155', name: 'Wynaut Rhydon The The', created_at: '2021-07-08T18:00:52.000Z', username: 'RhydonWynaut'}
-    ],
-    following: [
-      {id: '1395030869308547077', created_at: '2021-05-19T14:57:53.000Z', username: 'TycoonCRM', name: 'TYCOON CRM'},
-      {name: 'Torino YenTa', username: 'TorinoYenta', id: '1479321403627245568', created_at: '2022-01-07T05:18:26.000Z'},
-      {name: 'rambunctious scallywag', username: 'amemefriend', id: '1373303349597007876', created_at: '2021-03-20T16:00:25.000Z'},
-      {name: 'official funny man', username: 'gerbswastaken', id: '1179650436590006272', created_at: '2019-10-03T06:53:15.000Z'}
-    ]
-  })*/
 
   const loadUserData = useCallback(async () => {
     console.log(username)
